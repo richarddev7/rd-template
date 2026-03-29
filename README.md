@@ -5,84 +5,84 @@
 ![Flux UI](https://img.shields.io/badge/Flux_UI-000000?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 
-A feature-rich, clean, and modern boilerplate for Laravel applications. Designed to help you start your next software project, SaaS, or client portal with a robust foundation already in place.
+Un boilerplate rico en funciones, limpio y moderno para aplicaciones Laravel. Diseñado para ayudarte a comenzar tu próximo proyecto de software, SaaS o portal de clientes con una base sólida ya establecida de antemano.
 
-## ✨ Features
+## ✨ Características
 
-This starter kit comes pre-configured with the following core functionalities:
+Este kit de inicio viene preconfigurado con las siguientes funcionalidades principales:
 
-- **Authentication & Security:** Powered by Laravel Fortify. Includes login, registration, password resets, and two-factor authentication (2FA).
-- **Roles & Permissions:** Built-in Role-Based Access Control (RBAC) using `spatie/laravel-permission`. Easily manage user access and capabilities.
-- **Client & Portal System:** A dedicated architecture to manage Clients and "Client Requests", perfect for CRMs or helpdesks.
-- **Modern UI Components:** Beautiful, accessible, and responsive styling handled by **[Flux UI](https://fluxui.dev/)** (Tailwind CSS based).
-- **Media Management:** Pre-installed `spatie/laravel-medialibrary` for handling file uploads seamlessly.
-- **TALL Stack Architecture:** Utilizes Tailwind CSS, Alpine.js, Laravel, and Livewire (specifically Livewire Volt) for reactive frontend components.
+- **Autenticación y Seguridad:** Desarrollado con Laravel Fortify. Incluye inicio de sesión, registro, restablecimiento de contraseñas y autenticación de dos factores (2FA).
+- **Roles y Permisos:** Control de acceso basado en roles (RBAC) integrado usando `spatie/laravel-permission`. Administra fácilmente los accesos y capacidades de los usuarios.
+- **Sistema de Clientes y Portal:** Una arquitectura dedicada para gestionar "Clientes" y "Solicitudes de Clientes", perfecto para CRMs o mesas de ayuda (helpdesks).
+- **Componentes de UI Modernos:** Estilos hermosos, accesibles y responsivos manejados por **[Flux UI](https://fluxui.dev/)** (Basado en Tailwind CSS).
+- **Gestión de Medios:** Preinstalado con `spatie/laravel-medialibrary` para el manejo de subida de archivos sin problemas.
+- **Arquitectura TALL Stack:** Utiliza Tailwind CSS, Alpine.js, Laravel y Livewire (específicamente Livewire Volt) para componentes frontend reactivos.
 
-## 🚀 Getting Started
+## 🚀 Empezando
 
-Follow these steps to get your project up and running locally.
+Sigue estos pasos para levantar el proyecto localmente y empezar a correrlo.
 
-### Prerequisites
+### Prerrequisitos
 
 - PHP >= 8.2
 - Composer
 - Node.js & NPM
 - MySQL / PostgreSQL / SQLite
 
-### Installation
+### Instalación
 
-1. **Clone the repository:**
+1. **Clona el repositorio:**
    ```bash
-   git clone https://github.com/richarddev7/rd-template.git your-project-name
-   cd your-project-name
+   git clone https://github.com/richarddev7/rd-template.git tu-nombre-de-proyecto
+   cd tu-nombre-de-proyecto
    ```
 
-2. **Run the setup script:**
-   We have included a convenient setup script in `composer.json`. Just run:
+2. **Ejecuta el script de configuración:**
+   Hemos incluido un script de configuración conveniente en `composer.json`. Solo ejecuta:
    ```bash
    composer setup
    ```
-   *This command will install dependencies (composer & npm), copy the `.env` file, generate the app key, and run migrations.*
+   *Este comando instalará las dependencias (composer y npm), copiará el archivo `.env`, generará la key de la aplicación y ejecutará las migraciones.*
 
-3. **Configure the Environment:**
-   Update your database credentials in the newly created `.env` file:
+3. **Configura el Entorno:**
+   Actualiza las credenciales de tu base de datos en el archivo `.env` recién creado:
    ```env
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
-   DB_DATABASE=your_database_name
+   DB_DATABASE=nombre_de_tu_base_de_datos
    DB_USERNAME=root
    DB_PASSWORD=
    ```
-   *If you are using SQLite, just make sure `database/database.sqlite` exists and `DB_CONNECTION=sqlite` is set.*
+   *Si estás utilizando SQLite, asegúrate de que exista `database/database.sqlite` y que esté configurado `DB_CONNECTION=sqlite`.*
 
-4. **Seed the Database (Optional but recommended):**
-   If you want to populate your application with default roles, permissions, and an admin user.
+4. **Llena la Base de Datos (Opcional pero recomendado):**
+   Si deseas popular tu aplicación con roles por defecto, permisos y un usuario administrador.
    ```bash
    php artisan db:seed
    ```
 
-5. **Start the Development Server:**
-   You can run the server, queue listeners, and Vite compilation concurrently using our custom dev script:
+5. **Inicia el Servidor de Desarrollo:**
+   Puedes ejecutar el servidor, la escucha de colas (queue listeners) y la compilación de Vite simultáneamente utilizando nuestro script de desarrollo personalizado:
    ```bash
    composer dev
    ```
 
-   Your application should now be accessible at `http://localhost:8000`.
+   Tu aplicación ahora debería estar accesible en `http://localhost:8000`.
 
-## 🛠 Tech Stack
+## 🛠 Tecnologías (Tech Stack)
 
 - **Framework:** [Laravel 12.x](https://laravel.com/)
-- **Frontend Logic:** [Livewire Volt](https://livewire.laravel.com/docs/volt)
-- **UI Toolkit:** [Flux UI](https://fluxui.dev/) & Tailwind CSS
-- **Authentication:** [Laravel Fortify](https://laravel.com/docs/11.x/fortify)
-- **Authorization:** [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission)
-- **File Management:** [Spatie MediaLibrary](https://spatie.be/docs/laravel-medialibrary)
+- **Lógica Frontend:** [Livewire Volt](https://livewire.laravel.com/docs/volt)
+- **Kit de UI:** [Flux UI](https://fluxui.dev/) & Tailwind CSS
+- **Autenticación:** [Laravel Fortify](https://laravel.com/docs/11.x/fortify)
+- **Autorización:** [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission)
+- **Gestión de Archivos:** [Spatie MediaLibrary](https://spatie.be/docs/laravel-medialibrary)
 
-## 🎨 UI Guidelines
+## 🎨 Directrices de UI
 
-We strictly adhere to the [Flux UI Documentation](https://fluxui.dev/) as our source of truth for design. When building new components or pages, please use Flux syntax and design tokens to maintain a consistent Look & Feel throughout the application.
+Nos adherimos estrictamente a la [Documentación de Flux UI](https://fluxui.dev/) como nuestra fuente principal y única para el diseño de interfaces. Al construir nuevos componentes o páginas, por favor usa la sintáxis y los tokens de diseño predefinidos en la instalación de Flux para mantener una apariencia (Look & Feel) consistente en toda la aplicación.
 
-## 📄 License
+## 📄 Licencia
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). This starter kit is also provided under the MIT License.
+El framework Laravel es software de código abierto con licencia bajo la [licencia MIT](https://opensource.org/licenses/MIT). Este kit de inicio también se proporciona bajo la Licencia MIT.
