@@ -1,0 +1,6 @@
+
+Fatal error: Uncaught Error: Class "Illuminate\Foundation\Application" not found in C:\laragon\www\rd-template\bootstrap\app.php:7
+Stack trace:
+#0 C:\laragon\www\rd-template\artisan(14): require_once()
+#1 {main}
+  thrown in C:\laragon\www\rd-template\bootstrap\app.php on line 7

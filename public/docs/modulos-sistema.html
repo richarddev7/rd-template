@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRM Caridad — Documentación de Módulos del Sistema</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: #c7d2fe transparent;
+        }
+
+        #sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        #sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #sidebar::-webkit-scrollbar-thumb {
+            background-color: #c7d2fe;
+            border-radius: 99px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.45rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #4f46e5;
+            transition: background 0.15s, color 0.15s;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            background: #eef2ff;
+            color: #3730a3;
+        }
+
+        .nav-link.active {
+            background: #4f46e5;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .nav-link.active .route-badge {
+            background: rgba(255, 255, 255, 0.25);
+            color: #e0e7ff;
+        }
+
+        .nav-sub-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.3rem 0.6rem 0.3rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            color: #6366f1;
+            transition: background 0.15s;
+            text-decoration: none;
+        }
+
+        .nav-sub-link:hover {
+            background: #eef2ff;
+        }
+
+        .route-badge {
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: #a5b4fc;
+            white-space: nowrap;
+            margin-left: 0.35rem;
+        }
+
+        /* Cards */
+        .module-card {
+            transition: box-shadow 0.2s ease;
+        }
+
+        .module-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.09);
+        }
+
+        /* Offset scroll for sticky header */
+        section[id] {
+            scroll-margin-top: 1.5rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- LAYOUT WRAPPER -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="flex min-h-screen">
+
+        <!-- ─── SIDEBAR ─── -->
+        <aside id="sidebar"
+            class="hidden lg:flex flex-col w-64 shrink-0 sticky top-0 h-screen bg-white border-r border-gray-200 shadow-sm overflow-y-auto z-30">
+
+            <!-- Logo / título -->
+            <div class="px-5 pt-6 pb-4 border-b border-gray-100">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-indigo-400 mb-1">CRM Caridad</p>
+                <h1 class="text-sm font-bold text-gray-800 leading-snug">Documentación de Módulos</h1>
+                <p class="text-[10px] text-gray-400 mt-0.5">v1.0 &mdash; Marzo 2026</p>
+            </div>
+
+            <!-- Navegación -->
+            <nav class="flex-1 px-3 py-4 space-y-0.5">
+
+                <a href="#dashboard" class="nav-link">
+                    <span>🏠 Dashboard</span>
+                    <span class="route-badge">/dashboard</span>
+                </a>
+
+                <!-- Usuarios -->
+                <div>
+                    <a href="#usuarios" class="nav-link">
+                        <span>👤 Admin / Usuarios</span>
+                        <span class="route-badge">/users</span>
+                    </a>
+                    <div class="mt-0.5 space-y-0.5">
+                        <a href="#usuarios" class="nav-sub-link"><span>↳ Usuarios</span><span
+                                class="route-badge">/users</span></a>
+                        <a href="#roles" class="nav-sub-link"><span>↳ Roles y Permisos</span><span
+                                class="route-badge">/roles</span></a>
+                    </div>
+                </div>
+
+                <a href="#clientes" class="nav-link">
+                    <span>🤝 Clientes</span>
+                    <span class="route-badge">/clients</span>
+                </a>
+
+                <a href="#solicitudes" class="nav-link">
+                    <span>📋 Solicitudes</span>
+                    <span class="route-badge">/client-requests</span>
+                </a>
+
+                <a href="#casos" class="nav-link">
+                    <span>⚖️ Casos / Expedientes</span>
+                    <span class="route-badge">/legal-cases</span>
+                </a>
+
+                <a href="#tareas" class="nav-link">
+                    <span>✅ Tareas</span>
+                    <span class="route-badge">/tasks</span>
+                </a>
+
+                <!-- Agenda -->
+                <div>
+                    <a href="#agenda" class="nav-link">
+                        <span>📅 Agenda y Calendario</span>
+                        <span class="route-badge">/events</span>
+                    </a>
+                    <div class="mt-0.5 space-y-0.5">
+                        <a href="#agenda" class="nav-sub-link"><span>↳ Calendario</span><span
+                                class="route-badge">/events</span></a>
+                        <a href="#event-types" class="nav-sub-link"><span>↳ Tipos de Evento</span><span
+                                class="route-badge">/event-types</span></a>
+                    </div>
+                </div>
+
+                <a href="#reportes" class="nav-link">
+                    <span>📊 Reportes</span>
+                    <span class="route-badge">/reports</span>
+                </a>
+
+                <a href="#email-templates" class="nav-link">
+                    <span>✉️ Plantillas de Email</span>
+                    <span class="route-badge">/email-templates</span>
+                </a>
+
+                <a href="#configuracion" class="nav-link">
+                    <span>⚙️ Configuración</span>
+                    <span class="route-badge">/settings/app</span>
+                </a>
+
+            </nav>
+
+            <!-- Footer del sidebar -->
+            <div class="px-4 py-3 border-t border-gray-100">
+                <p class="text-[10px] text-gray-300 text-center">Documento interno &mdash; Solo desarrollo</p>
+            </div>
+        </aside>
+
+        <!-- ─── MAIN CONTENT ─── -->
+        <div class="flex-1 flex flex-col min-w-0">
+
+            <!-- Top bar (mobile: toggle + título) -->
+            <header class="bg-indigo-700 text-white px-6 py-5 shadow-lg flex items-center gap-4">
+                <!-- Mobile sidebar toggle -->
+                <button onclick="document.getElementById('mobileSidebar').classList.toggle('hidden')"
+                    class="lg:hidden p-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 transition-colors"
+                    aria-label="Abrir menú">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">CRM Caridad</h1>
+                    <p class="text-indigo-200 text-sm mt-0.5">Documentación Funcional de Módulos del Sistema</p>
+                </div>
+            </header>
+
+            <!-- Mobile sidebar overlay -->
+            <div id="mobileSidebar" class="hidden lg:hidden fixed inset-0 z-50 flex">
+                <div class="w-64 bg-white h-full overflow-y-auto shadow-2xl border-r border-gray-200 flex flex-col">
+                    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+                        <span class="font-bold text-gray-800 text-sm">Módulos</span>
+                        <button onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="text-gray-400 hover:text-gray-600 p-1">&times;</button>
+                    </div>
+                    <nav class="flex-1 px-3 py-4 space-y-0.5">
+                        <a href="#dashboard" onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>🏠 Dashboard</span><span class="route-badge">/dashboard</span></a>
+                        <a href="#usuarios" onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>👤 Admin / Usuarios</span><span class="route-badge">/users</span></a>
+                        <a href="#roles" onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-sub-link"><span>↳ Roles</span><span class="route-badge">/roles</span></a>
+                        <a href="#clientes" onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>🤝 Clientes</span><span class="route-badge">/clients</span></a>
+                        <a href="#solicitudes"
+                            onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>📋 Solicitudes</span><span
+                                class="route-badge">/client-requests</span></a>
+                        <a href="#casos" onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>⚖️ Casos</span><span class="route-badge">/legal-cases</span></a>
+                        <a href="#tareas" onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>✅ Tareas</span><span class="route-badge">/tasks</span></a>
+                        <a href="#agenda" onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>📅 Agenda</span><span class="route-badge">/events</span></a>
+                        <a href="#event-types"
+                            onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-sub-link"><span>↳ Tipos de Evento</span><span
+                                class="route-badge">/event-types</span></a>
+                        <a href="#reportes" onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>📊 Reportes</span><span class="route-badge">/reports</span></a>
+                        <a href="#email-templates"
+                            onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>✉️ Email Templates</span><span
+                                class="route-badge">/email-templates</span></a>
+                        <a href="#configuracion"
+                            onclick="document.getElementById('mobileSidebar').classList.add('hidden')"
+                            class="nav-link"><span>⚙️ Configuración</span><span
+                                class="route-badge">/settings/app</span></a>
+                    </nav>
+                </div>
+                <div class="flex-1 bg-black/40"
+                    onclick="document.getElementById('mobileSidebar').classList.add('hidden')"></div>
+            </div>
+
+            <!-- Modules content -->
+            <main class="flex-1 px-6 py-8 max-w-4xl w-full mx-auto">
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 0: DASHBOARD -->
+                <!-- ─────────────────────────────────────────── -->
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 0: DASHBOARD -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="dashboard"
+                    class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">🏠</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Dashboard</h2>
+                        <span
+                            class="ml-auto bg-slate-100 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full">/dashboard</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-5">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Pantalla de inicio personalizada</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Panel de control centralizado que se muestra al iniciar sesión. Presenta un resumen
+                            <strong>personalizado por usuario</strong> con las actividades, casos, solicitudes,
+                            tareas y
+                            eventos más recientes que le corresponden según sus permisos y asignaciones. El
+                            contenido
+                            es dinámico: cada rol ve únicamente los datos a los que tiene acceso.
+                        </p>
+                    </div>
+
+                    <!-- Secciones del Dashboard -->
+                    <div class="space-y-4">
+
+                        <!-- Mis Expedientes -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                            <h4 class="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                                <span class="text-lg">📂</span> 1. Mis Expedientes
+                                <span class="ml-auto text-xs text-slate-400 font-normal">Tabla completa</span>
+                            </h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Tabla con los <strong>5 últimos expedientes activos</strong> asignados al usuario.
+                                Muestra: título, número de caso, cliente, estado (Activo, En espera, Cerrado,
+                                Borrador),
+                                fecha de última actualización y una <strong>barra de progreso visual</strong> según
+                                el
+                                estado.
+                                Enlace directo a cada expediente y acceso a la lista completa.
+                            </p>
+                        </div>
+
+                        <!-- Mis Solicitudes -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                            <h4 class="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                                <span class="text-lg">📌</span> 2. Mis Solicitudes
+                                <span class="ml-auto text-xs text-slate-400 font-normal">Tarjetas en
+                                    cuadrícula</span>
+                            </h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Cuadrícula de tarjetas con las <strong>5 solicitudes más recientes</strong>
+                                asignadas al
+                                usuario.
+                                Cada tarjeta muestra: estado con badge de color (Pendiente, Aprobada, Rechazada, En
+                                proceso),
+                                número de solicitud, título, nombre del cliente, tiempo transcurrido desde la
+                                creación
+                                y <strong>total de horas registradas</strong> en tareas relacionadas.
+                            </p>
+                        </div>
+
+                        <!-- Mis Tareas + Mis Eventos (lado a lado) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                            <!-- Mis Tareas -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                                <h4 class="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                                    <span class="text-lg">✅</span> 3. Mis Tareas
+                                    <span class="ml-auto text-xs text-slate-400 font-normal">Lista vertical</span>
+                                </h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    Lista de las <strong>5 próximas tareas pendientes</strong> ordenadas por fecha
+                                    de
+                                    entrega.
+                                    Muestra: título, fecha límite, nivel de prioridad (badge de color) y checkbox de
+                                    estado
+                                    (marcado si completada). Acceso rápido para crear una nueva tarea.
+                                </p>
+                            </div>
+
+                            <!-- Mis Eventos -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                                <h4 class="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                                    <span class="text-lg">📅</span> 4. Mis Eventos
+                                    <span class="ml-auto text-xs text-slate-400 font-normal">Lista de próximos
+                                        eventos</span>
+                                </h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    Lista de los <strong>5 próximos eventos</strong> del usuario en el calendario.
+                                    Muestra: mini-bloque con mes y día, nombre del evento, hora de inicio y lugar
+                                    (o "Online" si no se especificó). Acceso directo para agendar un nuevo evento.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- Actividad Reciente -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                            <h4 class="font-semibold text-slate-700 mb-2 flex items-center gap-2">
+                                <span class="text-lg">📊</span> 5. Actividad Reciente
+                                <span class="ml-auto text-xs text-slate-400 font-normal">Línea de tiempo</span>
+                            </h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Línea de tiempo vertical con las <strong>últimas 10 actividades</strong> registradas
+                                en las tareas del usuario. Muestra: nombre del usuario que realizó la acción, tipo
+                                de
+                                actividad (edición, creación, nota), ícono de color, tiempo relativo (ej. "hace 3
+                                horas")
+                                y extracto del contenido de la actividad. El Super Admin ve la actividad de todos
+                                los
+                                usuarios.
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 1: USUARIOS + SUB: ROLES -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="usuarios"
+                    class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">👤</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Admin</h2>
+                        <span
+                            class="ml-auto bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">/login</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Usuario</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Gestión y administración de usuarios de todo el sistema con la posibilidad de
+                            <strong>Crear, Editar y Eliminar</strong> las cuentas de los usuarios que van a tener
+                            acceso
+                            al sistema a través de un correo y una contraseña.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>Foto:</strong> Foto del perfil del usuario</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>Nombre:</strong> Nombre del usuario</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>Correo:</strong> Email del usuario</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>Contraseña:</strong> Contraseña segura del usuario</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>Idioma:</strong> (Español - Inglés)</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>Rol:</strong> Nivel del usuario en el sistema (ej. Administrador, Abogado,
+                                Asistente)</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Sub-módulo: Roles y Permisos -->
+                <section id="roles"
+                    class="module-card bg-indigo-50 border border-indigo-200 rounded-2xl shadow-sm p-8 mb-8 ml-6">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">🔐</span>
+                        <h2 class="text-xl font-bold text-indigo-600">Sub-módulo: Roles y Permisos</h2>
+                        <span
+                            class="ml-auto bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">/roles</span>
+                    </div>
+                    <hr class="my-4 border-indigo-100" />
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Rol</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Gestión de los roles y permisos del sistema. Permite <strong>Crear, Editar y
+                                Eliminar</strong>
+                            roles, y asignarles permisos granulares que controlan qué acciones puede realizar cada
+                            usuario
+                            en cada módulo del sistema.
+                        </p>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-indigo-400 font-bold">•</span><span><strong>Nombre
+                                    del
+                                    rol:</strong> Identificador del rol (ej. Administrador, Abogado,
+                                Asistente)</span>
+                        </li>
+                        <li class="flex gap-2"><span
+                                class="text-indigo-400 font-bold">•</span><span><strong>Descripción:</strong>
+                                Explicación del
+                                propósito del rol</span></li>
+                        <li class="flex gap-2"><span class="text-indigo-400 font-bold">•</span><span><strong>Permisos
+                                    asignados:</strong> Lista de acciones habilitadas (ej. ver usuarios, crear
+                                casos,
+                                ver
+                                reportes)</span></li>
+                        <li class="flex gap-2"><span class="text-indigo-400 font-bold">•</span><span><strong>Usuarios
+                                    con este
+                                    rol:</strong> Cantidad de usuarios que tienen asignado el rol</span></li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 2: CLIENTES -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="clientes"
+                    class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">🤝</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Gestión de Clientes</h2>
+                        <span
+                            class="ml-auto bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">/clientes</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Cliente</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Registro, consulta y administración de todos los clientes del despacho jurídico, con la
+                            posibilidad
+                            de
+                            <strong>Crear, Editar, Visualizar y Archivar</strong> fichas de clientes. Permite
+                            mantener
+                            un historial completo de cada persona o empresa vinculada al despacho.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-green-500 font-bold">•</span><span><strong>Foto /
+                                    Avatar:</strong> Imagen o iniciales del cliente</span></li>
+                        <li class="flex gap-2"><span class="text-green-500 font-bold">•</span><span><strong>Tipo de
+                                    cliente:</strong> Persona Natural o Persona Jurídica (empresa)</span></li>
+                        <li class="flex gap-2"><span class="text-green-500 font-bold">•</span><span><strong>Nombre
+                                    completo /
+                                    Razón social:</strong> Nombre del cliente o empresa</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-green-500 font-bold">•</span><span><strong>Identificación:</strong>
+                                Cédula,
+                                NIF,
+                                Pasaporte u otro documento de identidad</span></li>
+                        <li class="flex gap-2"><span class="text-green-500 font-bold">•</span><span><strong>Correo
+                                    electrónico:</strong> Email de contacto principal</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-green-500 font-bold">•</span><span><strong>Teléfono:</strong>
+                                Número de contacto (fijo o móvil)</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-green-500 font-bold">•</span><span><strong>Dirección:</strong>
+                                Dirección postal completa del cliente</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-green-500 font-bold">•</span><span><strong>Estado:</strong>
+                                Activo / Archivado</span></li>
+                        <li class="flex gap-2"><span class="text-green-500 font-bold">•</span><span><strong>Notas
+                                    internas:</strong> Observaciones privadas del equipo legal sobre el
+                                cliente</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-green-500 font-bold">•</span><span><strong>Casos
+                                    asociados:</strong> Lista de expedientes vinculados al cliente</span></li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 2b: SOLICITUDES -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="solicitudes"
+                    class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">📋</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Solicitudes</h2>
+                        <span
+                            class="ml-auto bg-teal-100 text-teal-700 text-xs font-semibold px-3 py-1 rounded-full">/client-requests</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Solicitud</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Gestión de solicitudes de servicio enviadas por los clientes o registradas por el
+                            equipo.
+                            Permite <strong>Crear, Asignar, Seguir y Cerrar</strong> solicitudes de atención legal,
+                            actuando como punto de entrada que puede derivar en la apertura de un expediente formal.
+                        </p>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-teal-600 font-bold">•</span><span><strong>Número de
+                                    solicitud:</strong> Código único de la solicitud (ej. SOL-2026-0012)</span></li>
+                        <li class="flex gap-2"><span class="text-teal-600 font-bold">•</span><span><strong>Cliente
+                                    solicitante:</strong> Cliente que origina la solicitud</span></li>
+                        <li class="flex gap-2"><span class="text-teal-600 font-bold">•</span><span><strong>Tipo de
+                                    asunto:</strong> Categoría del servicio solicitado (ej. Consulta,
+                                Representación,
+                                Revisión
+                                de contrato)</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-teal-600 font-bold">•</span><span><strong>Descripción:</strong>
+                                Detalle de la necesidad o problema del cliente</span></li>
+                        <li class="flex gap-2"><span class="text-teal-600 font-bold">•</span><span><strong>Asignado
+                                    a:</strong>
+                                Usuario(s) responsable(s) de atender la solicitud</span></li>
+                        <li class="flex gap-2"><span class="text-teal-600 font-bold">•</span><span><strong>Fecha de
+                                    entrada:</strong> Cuándo se registró la solicitud</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-teal-600 font-bold">•</span><span><strong>Prioridad:</strong>
+                                Alta, Media, Baja</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-teal-600 font-bold">•</span><span><strong>Estado:</strong>
+                                Nueva, En revisión, En proceso, Cerrada, Rechazada</span></li>
+                        <li class="flex gap-2"><span class="text-teal-600 font-bold">•</span><span><strong>Expediente
+                                    generado:</strong> Caso abierto a partir de esta solicitud (opcional)</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-teal-600 font-bold">•</span><span><strong>Notificación
+                                    al
+                                    cliente:</strong> Aviso automático al cliente sobre el estado de su
+                                solicitud</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 3: CASOS / EXPEDIENTES -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="casos" class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">⚖️</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Gestión de Casos / Expedientes</h2>
+                        <span
+                            class="ml-auto bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">/casos</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Caso / Expediente</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Gestión integral de los expedientes legales del despacho. Permite
+                            <strong>Crear, Editar, Consultar y Cerrar</strong> casos, asociarlos a clientes,
+                            asignar abogados responsables y llevar un seguimiento del estado y progreso de cada
+                            asunto
+                            legal.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Número
+                                    de
+                                    expediente:</strong> Código único e interno del caso (ej. EXP-2026-0041) — ruta:
+                                <code class="bg-gray-100 px-1 rounded text-xs">/legal-cases</code></span></li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Título
+                                    /
+                                    Asunto:</strong> Descripción breve del caso legal</span></li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Área
+                                    legal:</strong> Área del derecho aplicable (ej. Civil, Penal, Laboral,
+                                Mercantil,
+                                Familiar)</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-yellow-600 font-bold">•</span><span><strong>Cliente:</strong>
+                                Cliente al que pertenece el caso (vinculado al módulo de Clientes)</span></li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Abogado
+                                    responsable:</strong> Usuario con rol de Abogado asignado al caso</span></li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Equipo
+                                    asignado:</strong> Otros usuarios (ej. Asistentes) vinculados al
+                                expediente</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Fecha
+                                    de
+                                    apertura:</strong> Fecha en que se inició el caso</span></li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Fecha
+                                    límite:</strong> Fecha estimada de resolución o vencimiento</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-yellow-600 font-bold">•</span><span><strong>Estado:</strong>
+                                Activo, En espera, Cerrado, Archivado</span></li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Descripción
+                                    /
+                                    Antecedentes:</strong> Detalle del asunto legal y contexto</span></li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Documentos
+                                    adjuntos:</strong> Archivos relacionados al expediente (vinculado al módulo de
+                                Documentos)</span></li>
+                        <li class="flex gap-2"><span class="text-yellow-600 font-bold">•</span><span><strong>Historial
+                                    de
+                                    actividad:</strong> Registro cronológico de acciones y actualizaciones</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 4: AGENDA Y CALENDARIO + SUB: TIPOS DE EVENTO -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="agenda" class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">📅</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Agenda y Calendario</h2>
+                        <span
+                            class="ml-auto bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">/agenda</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Evento / Cita</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Planificación y control de audiencias, reuniones, vencimientos y citas del despacho.
+                            Permite <strong>Crear, Editar, Visualizar y Eliminar</strong> eventos en un calendario
+                            interactivo,
+                            con alertas y recordatorios para los usuarios involucrados.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-blue-500 font-bold">•</span><span><strong>Título
+                                    del
+                                    evento:</strong> Nombre descriptivo de la cita o audiencia</span></li>
+                        <li class="flex gap-2"><span class="text-blue-500 font-bold">•</span><span><strong>Tipo de
+                                    evento:</strong> Audiencia, Reunión, Vencimiento, Llamada, Otro</span></li>
+                        <li class="flex gap-2"><span class="text-blue-500 font-bold">•</span><span><strong>Caso
+                                    asociado:</strong> Expediente relacionado al evento (opcional)</span></li>
+                        <li class="flex gap-2"><span class="text-blue-500 font-bold">•</span><span><strong>Cliente
+                                    asociado:</strong> Cliente involucrado en el evento (opcional)</span></li>
+                        <li class="flex gap-2"><span class="text-blue-500 font-bold">•</span><span><strong>Fecha y
+                                    hora
+                                    de
+                                    inicio:</strong> Cuándo comienza el evento</span></li>
+                        <li class="flex gap-2"><span class="text-blue-500 font-bold">•</span><span><strong>Fecha y
+                                    hora
+                                    de
+                                    fin:</strong> Duración estimada del evento</span></li>
+                        <li class="flex gap-2"><span class="text-blue-500 font-bold">•</span><span><strong>Lugar /
+                                    Enlace:</strong> Dirección física o enlace de videoconferencia</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-blue-500 font-bold">•</span><span><strong>Participantes:</strong>
+                                Usuarios
+                                internos
+                                y/o clientes invitados al evento</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-blue-500 font-bold">•</span><span><strong>Recordatorio:</strong> Alerta
+                                previa
+                                configurable (ej. 30 min, 1 día antes)</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-blue-500 font-bold">•</span><span><strong>Notas:</strong>
+                                Descripción adicional o instrucciones del evento</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-blue-500 font-bold">•</span><span><strong>Estado:</strong>
+                                Pendiente, Completado, Cancelado</span></li>
+                    </ul>
+                </section>
+
+                <!-- Sub-módulo: Tipos de Evento -->
+                <section id="event-types"
+                    class="module-card bg-blue-50 border border-blue-200 rounded-2xl shadow-sm p-8 mb-8 ml-6">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">🏷️</span>
+                        <h2 class="text-xl font-bold text-blue-600">Sub-módulo: Tipos de Evento</h2>
+                        <span
+                            class="ml-auto bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">/event-types</span>
+                    </div>
+                    <hr class="my-4 border-blue-100" />
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Tipo de Evento</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Catálogo configurable de categorías de eventos del calendario. Permite
+                            <strong>Crear, Editar y Eliminar</strong> tipos de evento para clasificar
+                            las citas y actividades del despacho (ej. Audiencia, Reunión, Vencimiento).
+                        </p>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-blue-400 font-bold">•</span><span><strong>Nombre
+                                    del
+                                    tipo:</strong> Etiqueta del tipo de evento (ej. Audiencia, Reunión interna,
+                                Llamada)</span>
+                        </li>
+                        <li class="flex gap-2"><span
+                                class="text-blue-400 font-bold">•</span><span><strong>Color:</strong> Color
+                                visual identificador en el calendario</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-blue-400 font-bold">•</span><span><strong>Descripción:</strong>
+                                Breve descripción del propósito del tipo de evento</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-blue-400 font-bold">•</span><span><strong>Activo:</strong> Si
+                                el tipo está disponible para seleccionarse al crear eventos</span></li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 5: GESTIÓN DE DOCUMENTOS (OCULTO) -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="documentos"
+                    class="hidden module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">📁</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Gestión de Documentos</h2>
+                        <span
+                            class="ml-auto bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1 rounded-full">/documentos</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Documento</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Repositorio centralizado de archivos del despacho. Permite
+                            <strong>Subir, Organizar, Previsualizar, Descargar y Eliminar</strong> documentos
+                            vinculados a clientes, casos o al despacho en general. Incluye control de versiones
+                            y gestión de permisos por rol de usuario.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-orange-500 font-bold">•</span><span><strong>Nombre
+                                    del
+                                    documento:</strong> Título descriptivo del archivo</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-orange-500 font-bold">•</span><span><strong>Archivo:</strong>
+                                Archivo adjunto (PDF, DOCX, XLSX, JPG, etc.)</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-orange-500 font-bold">•</span><span><strong>Categoría:</strong>
+                                Tipo de documento (ej. Contrato, Demanda, Poder Notarial, Factura, Sentencia)</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-orange-500 font-bold">•</span><span><strong>Caso
+                                    asociado:</strong> Expediente al que pertenece el documento (opcional)</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-orange-500 font-bold">•</span><span><strong>Cliente
+                                    asociado:</strong> Cliente dueño del documento (opcional)</span></li>
+                        <li class="flex gap-2"><span class="text-orange-500 font-bold">•</span><span><strong>Subido
+                                    por:</strong> Usuario que cargó el documento al sistema</span></li>
+                        <li class="flex gap-2"><span class="text-orange-500 font-bold">•</span><span><strong>Fecha
+                                    de
+                                    carga:</strong> Fecha en que se subió el archivo</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-orange-500 font-bold">•</span><span><strong>Versión:</strong>
+                                Número de versión del documento (para control de cambios)</span></li>
+                        <li class="flex gap-2"><span class="text-orange-500 font-bold">•</span><span><strong>Permisos de
+                                    acceso:</strong> Qué roles pueden ver o descargar el documento</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-orange-500 font-bold">•</span><span><strong>Descripción:</strong> Notas
+                                o
+                                contexto
+                                sobre el documento</span></li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 6: TAREAS -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="tareas" class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">✅</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Gestión de Tareas</h2>
+                        <span
+                            class="ml-auto bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">/tareas</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Tarea</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Gestión de actividades y pendientes del equipo legal. Permite
+                            <strong>Crear, Asignar, Editar y Completar</strong> tareas asociadas a casos o usuarios,
+                            con prioridades, fechas de vencimiento y seguimiento del tiempo invertido.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span
+                                class="text-purple-500 font-bold">•</span><span><strong>Título:</strong>
+                                Nombre corto de la tarea a realizar</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-purple-500 font-bold">•</span><span><strong>Descripción:</strong>
+                                Detalle de
+                                lo que
+                                implica la tarea</span></li>
+                        <li class="flex gap-2"><span class="text-purple-500 font-bold">•</span><span><strong>Caso
+                                    asociado:</strong> Expediente al que pertenece la tarea (opcional)</span></li>
+                        <li class="flex gap-2"><span class="text-purple-500 font-bold">•</span><span><strong>Asignado
+                                    a:</strong> Usuario(s) responsable(s) de ejecutar la tarea</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-purple-500 font-bold">•</span><span><strong>Prioridad:</strong>
+                                Alta, Media, Baja</span></li>
+                        <li class="flex gap-2"><span class="text-purple-500 font-bold">•</span><span><strong>Fecha
+                                    de
+                                    vencimiento:</strong> Fecha límite para completar la tarea</span></li>
+                        <li class="flex gap-2"><span class="text-purple-500 font-bold">•</span><span><strong>Horas
+                                    estimadas:</strong> Tiempo estimado para completar la tarea</span></li>
+                        <li class="flex gap-2"><span class="text-purple-500 font-bold">•</span><span><strong>Horas
+                                    registradas:</strong> Tiempo real invertido en la tarea</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-purple-500 font-bold">•</span><span><strong>Estado:</strong>
+                                Pendiente, En progreso, Completada, Cancelada</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-purple-500 font-bold">•</span><span><strong>Notificación:</strong> Aviso
+                                al
+                                usuario
+                                asignado al crear o actualizar la tarea</span></li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 7: FACTURACIÓN (OCULTO) -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="facturacion"
+                    class="hidden module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">💳</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Facturación y Pagos</h2>
+                        <span
+                            class="ml-auto bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">/facturacion</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Factura / Honorario</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Control financiero del despacho. Permite <strong>Generar, Enviar, Registrar y
+                                Controlar</strong>
+                            facturas y pagos de honorarios por servicios legales prestados a los clientes,
+                            con generación de reportes de cobros pendientes y pagados.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-emerald-600 font-bold">•</span><span><strong>Número
+                                    de
+                                    factura:</strong> Código único de la factura (ej. FAC-2026-0018)</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-emerald-600 font-bold">•</span><span><strong>Cliente:</strong>
+                                A quién se emite la factura</span></li>
+                        <li class="flex gap-2"><span class="text-emerald-600 font-bold">•</span><span><strong>Caso
+                                    asociado:</strong> Expediente por el que se cobran honorarios (opcional)</span>
+                        </li>
+                        <li class="flex gap-2"><span
+                                class="text-emerald-600 font-bold">•</span><span><strong>Concepto(s):</strong>
+                                Descripción de
+                                los servicios prestados e importes</span></li>
+                        <li class="flex gap-2"><span class="text-emerald-600 font-bold">•</span><span><strong>Subtotal /
+                                    Impuesto / Total:</strong> Desglose del importe a cobrar</span></li>
+                        <li class="flex gap-2"><span class="text-emerald-600 font-bold">•</span><span><strong>Fecha
+                                    de
+                                    emisión:</strong> Cuándo se generó la factura</span></li>
+                        <li class="flex gap-2"><span class="text-emerald-600 font-bold">•</span><span><strong>Fecha
+                                    de
+                                    vencimiento:</strong> Fecha límite de pago</span></li>
+                        <li class="flex gap-2"><span class="text-emerald-600 font-bold">•</span><span><strong>Método
+                                    de
+                                    pago:</strong> Transferencia, Efectivo, Tarjeta, Otro</span></li>
+                        <li class="flex gap-2"><span class="text-emerald-600 font-bold">•</span><span><strong>Estado
+                                    de
+                                    pago:</strong> Pendiente, Pagada, Vencida, Anulada</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-emerald-600 font-bold">•</span><span><strong>Notas:</strong>
+                                Observaciones adicionales sobre la factura</span></li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 8: REPORTES -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="reportes"
+                    class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">📊</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Reportes y Estadísticas</h2>
+                        <span
+                            class="ml-auto bg-rose-100 text-rose-700 text-xs font-semibold px-3 py-1 rounded-full">/reportes</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Reporte</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Panel de inteligencia del despacho. Permite <strong>Consultar, Filtrar y
+                                Exportar</strong>
+                            informes sobre la actividad del sistema, incluyendo productividad por usuario,
+                            estado de casos, facturación acumulada y rendimiento general del despacho.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-rose-500 font-bold">•</span><span><strong>Tipo de
+                                    reporte:</strong> Usuarios, Casos, Clientes, Facturación, Tareas</span></li>
+                        <li class="flex gap-2"><span class="text-rose-500 font-bold">•</span><span><strong>Filtro
+                                    por
+                                    fecha:</strong> Rango de fechas para delimitar el período analizado</span></li>
+                        <li class="flex gap-2"><span class="text-rose-500 font-bold">•</span><span><strong>Filtro
+                                    por
+                                    usuario:</strong> Ver datos de un usuario o abogado específico</span></li>
+                        <li class="flex gap-2"><span class="text-rose-500 font-bold">•</span><span><strong>Filtro
+                                    por
+                                    estado:</strong> Activos, Cerrados, Pendientes, etc.</span></li>
+                        <li class="flex gap-2"><span class="text-rose-500 font-bold">•</span><span><strong>Gráficas
+                                    comparativas:</strong> Visualizaciones de tendencias y comparativas por
+                                período</span></li>
+                        <li class="flex gap-2"><span class="text-rose-500 font-bold">•</span><span><strong>Resumen
+                                    de
+                                    horas:</strong> Total de horas registradas por usuario o caso</span></li>
+                        <li class="flex gap-2"><span class="text-rose-500 font-bold">•</span><span><strong>Exportar
+                                    PDF:</strong> Generación del reporte en formato PDF descargable</span></li>
+                        <li class="flex gap-2"><span class="text-rose-500 font-bold">•</span><span><strong>Exportar
+                                    Excel:</strong> Exportación de datos en formato XLSX para análisis
+                                externo</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 9: NOTIFICACIONES (OCULTO - sin ruta en sidebar) -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="notificaciones"
+                    class="hidden module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">🔔</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Notificaciones</h2>
+                        <span
+                            class="ml-auto bg-amber-100 text-amber-700 text-xs font-semibold px-3 py-1 rounded-full">/notificaciones</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Notificación</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Centro de comunicación interna del sistema. <strong>Informa automáticamente</strong> a
+                            los
+                            usuarios sobre eventos relevantes: asignaciones, vencimientos, nuevos mensajes y
+                            actualizaciones de casos. Soporta notificaciones en el sistema y envío por correo
+                            electrónico.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span
+                                class="text-amber-600 font-bold">•</span><span><strong>Tipo:</strong> Nueva
+                                tarea asignada, Caso actualizado, Vencimiento próximo, Nuevo documento, Pago
+                                recibido</span>
+                        </li>
+                        <li class="flex gap-2"><span
+                                class="text-amber-600 font-bold">•</span><span><strong>Destinatario:</strong>
+                                Usuario al
+                                que va
+                                dirigida la notificación</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-amber-600 font-bold">•</span><span><strong>Mensaje:</strong>
+                                Contenido descriptivo de la alerta</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-amber-600 font-bold">•</span><span><strong>Enlace:</strong>
+                                Acceso directo al recurso relacionado (caso, tarea, documento)</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-amber-600 font-bold">•</span><span><strong>Canal:</strong> En
+                                el sistema (campana) y/o correo electrónico</span></li>
+                        <li class="flex gap-2"><span class="text-amber-600 font-bold">•</span><span><strong>Fecha y
+                                    hora:</strong> Cuándo se generó la notificación</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-amber-600 font-bold">•</span><span><strong>Estado:</strong> No
+                                leída / Leída</span></li>
+                        <li class="flex gap-2"><span class="text-amber-600 font-bold">•</span><span><strong>Preferencias
+                                    del
+                                    usuario:</strong> Configurar qué tipo de notificaciones recibir por canal</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 10: CONFIGURACIÓN -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="configuracion"
+                    class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">⚙️</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Configuración del Sistema</h2>
+                        <span
+                            class="ml-auto bg-gray-200 text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">/configuracion</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Configuración General</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Panel de ajustes globales del sistema, accesible únicamente por el rol Administrador.
+                            Permite <strong>Personalizar, Activar y Desactivar</strong> funcionalidades del sistema,
+                            configurar los datos del despacho, gestionar roles y permisos, e integrar servicios
+                            externos.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Datos del
+                                    despacho:</strong> Nombre, logotipo, dirección, teléfono y correo del
+                                despacho</span></li>
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Idioma
+                                    del
+                                    sistema:</strong> Idioma predeterminado (Español / Inglés)</span></li>
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Zona
+                                    horaria:</strong> Configuración de la zona horaria para eventos y fechas</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Roles y
+                                    permisos:</strong> Definir qué puede hacer cada rol en cada módulo</span></li>
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Áreas
+                                    legales:</strong> Catálogo de áreas del derecho disponibles en el sistema</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Categorías de
+                                    documentos:</strong> Tipos de documentos disponibles para clasificación</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Configuración
+                                    de
+                                    correo:</strong> SMTP o servicio de correo para el envío de
+                                notificaciones</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Respaldo
+                                    (Backup):</strong> Programación y descarga de copias de seguridad de la base de
+                                datos</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-gray-500 font-bold">•</span><span><strong>Registro
+                                    de
+                                    auditoría:</strong> Historial de acciones sensibles realizadas por usuarios en
+                                el
+                                sistema</span></li>
+                    </ul>
+                </section>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- MÓDULO 11: EMAIL TEMPLATES -->
+                <!-- ─────────────────────────────────────────── -->
+                <section id="email-templates"
+                    class="module-card bg-white border border-gray-200 rounded-2xl shadow-sm p-8 mb-8">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="text-2xl">✉️</span>
+                        <h2 class="text-2xl font-bold text-indigo-700">Módulo: Plantillas de Email</h2>
+                        <span
+                            class="ml-auto bg-sky-100 text-sky-700 text-xs font-semibold px-3 py-1 rounded-full">/email-templates</span>
+                    </div>
+                    <hr class="my-4 border-gray-100" />
+
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-1">Plantilla de Email</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Gestión centralizada de las plantillas de correo electrónico utilizadas por el sistema
+                            para
+                            el envío de notificaciones automáticas. Permite <strong>Crear, Editar, Previsualizar y
+                                Activar/Desactivar</strong> plantillas personalizadas con variables dinámicas que se
+                            reemplazan
+                            automáticamente al momento del envío (ej. nombre del cliente, número de caso, fecha).
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex gap-2"><span class="text-sky-500 font-bold">•</span><span><strong>Nombre de
+                                    la
+                                    plantilla:</strong> Identificador descriptivo interno (ej. "Bienvenida al
+                                cliente")</span>
+                        </li>
+                        <li class="flex gap-2"><span class="text-sky-500 font-bold">•</span><span><strong>Evento
+                                    disparador:</strong> Acción que envía este correo (ej. Nuevo usuario, Nueva
+                                tarea,
+                                Caso
+                                cerrado, Solicitud asignada)</span></li>
+                        <li class="flex gap-2"><span class="text-sky-500 font-bold">•</span><span><strong>Asunto
+                                    (Subject):</strong> Línea de asunto del correo, admite variables dinámicas (ej.
+                                <code class="bg-gray-100 px-1 rounded">{{nombre}}</code>, <code
+                                    class="bg-gray-100 px-1 rounded">{{caso}}</code>)</span></li>
+                        <li class="flex gap-2"><span class="text-sky-500 font-bold">•</span><span><strong>Cuerpo del
+                                    mensaje
+                                    (Body):</strong> Contenido HTML del correo con soporte de variables y formato
+                                enriquecido</span></li>
+                        <li class="flex gap-2"><span class="text-sky-500 font-bold">•</span><span><strong>Variables
+                                    disponibles:</strong> Lista de variables dinámicas utilizables (ej. <code
+                                    class="bg-gray-100 px-1 rounded">{{nombre_cliente}}</code>, <code
+                                    class="bg-gray-100 px-1 rounded">{{numero_caso}}</code>, <code
+                                    class="bg-gray-100 px-1 rounded">{{fecha}}</code>, <code
+                                    class="bg-gray-100 px-1 rounded">{{enlace}}</code>)</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-sky-500 font-bold">•</span><span><strong>Idioma:</strong>
+                                Versión en Español y/o Inglés de cada plantilla</span></li>
+                        <li class="flex gap-2"><span class="text-sky-500 font-bold">•</span><span><strong>Vista
+                                    previa:</strong>
+                                Previsualización del correo renderizado antes de guardar cambios</span></li>
+                        <li class="flex gap-2"><span
+                                class="text-sky-500 font-bold">•</span><span><strong>Estado:</strong>
+                                Activa / Inactiva (si está inactiva, el sistema no envía ese correo)</span></li>
+                        <li class="flex gap-2"><span class="text-sky-500 font-bold">•</span><span><strong>Última
+                                    modificación:</strong> Usuario y fecha del último cambio realizado a la
+                                plantilla</span>
+                        </li>
+                    </ul>
+                </section>
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-indigo-700 text-indigo-200 text-center text-sm py-6 mt-4">
+                <p>CRM Caridad &mdash; Documentación Funcional de Módulos &mdash; v1.0 &mdash; Marzo 2026</p>
+                <p class="text-indigo-400 text-xs mt-1">Documento interno &mdash; Solo para uso del equipo de desarrollo
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- Active sidebar link on scroll -->
+    <script>
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('#sidebar .nav-link, #sidebar .nav-sub-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`#sidebar a[href="#${id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
+
+</body>
+
+</html>
